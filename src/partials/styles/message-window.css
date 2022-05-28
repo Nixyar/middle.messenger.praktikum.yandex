@@ -1,0 +1,49 @@
+@import "../../../assets/styles.css";
+
+.message-window {
+    width: 81%;
+}
+
+.header-chat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    background-color: var(--cadet-blue);
+    box-shadow: var(--base-shadow);
+}
+
+.header-chat__profile-info {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: var(--dark-grey);
+    cursor: pointer;
+}
+
+.header-chat__profile-info--avatar {
+    width: 60px;
+    height: 60px;
+    margin-left: 24px;
+    margin-right: 12px;
+    border-radius: 100%;
+}
+
+.message-window__chat {
+    height: calc(100% - 70px);
+    background-color: var(--light-grey);
+}
+
+.chat-control {
+    display: flex;
+    align-items: center;
+}
+
+.chat-control button {
+    margin-right: 24px;
+    transition: 0.3s ease;
+}
+
+.chat-control button:hover svg path {
+    fill: #FFFFFF;
+}

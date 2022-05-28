@@ -1,0 +1,29 @@
+---
+title: 'Sign up page'
+css:
+- 'signForms.css'
+---
+{{!< base}}
+
+<main class="sign-container">
+    <form class="sign__form">
+        <h1 class="sign__title h1">Sign up</h1>
+        <p class="p1">First name</p>
+        {{> input type="text" inputName="first_name"}}
+        <p class="p1">Second name</p>
+        {{> input type="text" inputName="second_name"}}
+        <p class="p1">Login</p>
+        {{> input type="text" inputName="login"}}
+        <p class="p1">E-mail</p>
+        {{> input type="email" inputName="email"}}
+        <p class="p1">Phone</p>
+        {{> input type="number" inputName="phone"}}
+        <p class="p1">Password</p>
+        {{> input type="password" inputName="password"}}
+        <p class="p1">Confirm password</p>
+        {{> input type="password" inputName="password"}}
+        <a href="messenger.page.hbs">{{> button classes="sign" type="button" textBtn="Sign up"}}</a>
+
+        <p class="sign__form--link p1">Already have an account? <a href="./">Sign in</a></p>
+    </form>
+</main>

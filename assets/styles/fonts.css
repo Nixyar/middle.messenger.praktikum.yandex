@@ -1,0 +1,65 @@
+/*Здесь подключаются шрифты и классы к ним*/
+@font-face {
+  font-family: TiroBanglaItalic;
+  src: url(../fonts/TiroBangla-Italic.woff2) format("woff2"),
+  url(../fonts/TiroBangla-Italic.woff) format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: TiroBangla;
+  src: url(../fonts/TiroBangla-Regular.woff2) format("woff2"),
+  url(../fonts/TiroBangla-Regular.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.btn {
+  font-family: TiroBangla, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: normal;
+}
+
+.supercaption {
+  font-family: TiroBangla, sans-serif;
+  font-size: 90px;
+  line-height: 74px;
+  font-weight: bold;
+}
+
+.h1 {
+  font-family: TiroBangla, sans-serif;
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+.h4 {
+  font-family: TiroBanglaItalic, sans-serif;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: normal;
+}
+
+.p1 {
+  font-family: TiroBanglaItalic, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: normal;
+}
+
+.p1 {
+  font-family: TiroBanglaItalic, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: bold;
+}
+
+.p2 {
+  font-family: TiroBangla, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: normal;
+}
