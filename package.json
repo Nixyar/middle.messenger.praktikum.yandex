@@ -2,7 +2,7 @@
   "name": "test",
   "version": "1.0.0beta",
   "scripts": {
-    "build": "parcel build src/pages/auth.page.hbs --no-cache --public-url ./",
+    "build": "parcel build src/pages/auth.page.hbs --no-cache --no-minify --public-url ./",
     "start": "parcel src/pages/auth.page.hbs --no-cache --port=3000",
     "serve": "serve -s dist"
   },
