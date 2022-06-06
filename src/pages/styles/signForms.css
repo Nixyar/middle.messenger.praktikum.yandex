@@ -1,0 +1,45 @@
+@import "../../../assets/styles.css";
+
+.sign-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.sign__title {
+    margin-bottom: 12px;
+    color: var(--dark-grey);
+    text-align: center;
+}
+
+.sign__form {
+    padding: 14px 32px;
+    color: var(--dark-grey);
+    width: 28%;
+    border-radius: 8px;
+    box-shadow: var(--base-shadow);
+}
+
+.sign__form input {
+    margin-bottom: 28px;
+}
+
+.sign__form button {
+    margin: auto;
+}
+
+.sign__form--link {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.sign__form--link a {
+    color: var(--dark-grey);
+    text-decoration: underline;
+    transition: 0.2s ease-in;
+}
+
+.sign__form--link a:hover {
+    color: var(--light-blue);
+}
