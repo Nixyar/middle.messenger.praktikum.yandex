@@ -16,6 +16,8 @@ export default class Block<P = any> {
     FLOW_RENDER: 'flow:render',
   } as const;
 
+  get getComponentName(){return ''};
+
   public id = nanoid(6);
   _meta: BlockMeta;
 
