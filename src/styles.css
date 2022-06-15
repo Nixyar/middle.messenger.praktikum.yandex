@@ -1,0 +1,11 @@
+@import "../assets/styles/fonts.css";
+@import "../assets/styles/reset.css";
+@import "../assets/styles/colors-variables.css";
+
+div#app {
+    height: 100%;
+}
+
+.messenger-page {
+    display: flex;
+}

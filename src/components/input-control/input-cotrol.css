@@ -1,0 +1,12 @@
+@import "../../../assets/styles/colors-variables.css";
+
+label {
+    position: relative;
+}
+
+.input__error {
+    position: absolute;
+    top: 54px;
+    width: 300px;
+    color: var(--error);
+}
