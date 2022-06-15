@@ -1,0 +1,11 @@
+a {
+    display: inline-block;
+    color: var(--dark-grey);
+    text-decoration: underline;
+    transition: 0.2s ease-in;
+    cursor: pointer;
+}
+
+a:hover {
+    color: var(--light-blue);
+}

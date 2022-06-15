@@ -1,6 +1,12 @@
+## Sprint 1
 ## Description
 
-This project in process.
+This project in process...
+Project refactoring on typescript.
+Added eslint.
+Added stylelint.
+Added event handler on forms.
+Added class for work with requests.
 
 ## Domain on Netlify
 
@@ -15,6 +21,4 @@ https://deploy--jolly-souffle-0cce95.netlify.app/auth.page.html
 - npm run build  (for build project)
 
 ### UI design in folder "UI"
-Открытый pull request на выполненный 1 sprint:
-
-https://github.com/Nixyar/middle.messenger.praktikum.yandex/pull/3
+Открытый pull request на выполненный 2 sprint:
