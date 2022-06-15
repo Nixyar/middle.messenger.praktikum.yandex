@@ -3,9 +3,10 @@
   "version": "1.0.0beta",
   "author": "Kozlov Oleg",
   "description": "Messenger",
+  "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html --no-source-maps --port=3000",
-    "build": "parcel build src/index.html --no-cache --public-url ./",
+    "build": "parcel build src/pages/*.hbs",
     "serve": "serve -s dist"
   },
   "dependencies": {
