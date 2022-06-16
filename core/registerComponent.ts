@@ -5,8 +5,8 @@ interface BlockConstructable<Props = any> {
   new(props: Props): Block;
 }
 
-export default function registerComponent<Props extends any>(Component: BlockConstructable<Props>) {
-  Handlebars.registerHelper(Component.name, function (this: Props, { hash: { ref, ...hash }, data, fn }: HelperOptions) {
+export default function registerComponent<Props extends any>(Name: string, Component: BlockConstructable<Props>) {
+  Handlebars.registerHelper(Name, function (this: Props, { hash: { ref, ...hash }, data, fn }: HelperOptions) {
     if (!data.root.children) {
       data.root.children = {};
     }
