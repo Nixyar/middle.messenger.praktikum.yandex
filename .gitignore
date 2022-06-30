@@ -1,5 +1,6 @@
 # compiled output
 /dist
+.parcel-cache
 
 # dependencies
 /node_modules
