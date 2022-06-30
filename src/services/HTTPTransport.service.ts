@@ -36,8 +36,7 @@ export class HTTPTransportService {
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
 
-            url = method === 'GET' ? url + queryStringify(data) : url;
-            xhr.open(method, url);
+            xhr.open(method, method === 'GET' ? url + queryStringify(data) : url);
             xhr.timeout = timeout;
 
             xhr.onload = function() {

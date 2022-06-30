@@ -1,5 +1,5 @@
 import {registerComponent, renderDOM} from '../core/index';
-// import {AuthPage} from "./pages/auth-page/auth-page";
+import {AuthPage} from "./pages/auth-page/auth-page";
 
 // Components import
 import Button from "./components/button";
@@ -10,7 +10,6 @@ import MessageWindow from "./components/message-window";
 import SearchInput from "./components/search-input";
 import InputControl from "./components/input-control";
 import Link from "./components/link";
-import MessengerPage from "./pages/messenger-page";
 
 // Icons import
 import IconExit from "./components/icons/icon-exit";
@@ -38,5 +37,5 @@ registerComponent('IconProfile', IconProfile);
 registerComponent('IconPhone', IconPhone);
 
 document.addEventListener("DOMContentLoaded", () => {
-    renderDOM(new MessengerPage({}));
+    renderDOM(new AuthPage({}));
 });
