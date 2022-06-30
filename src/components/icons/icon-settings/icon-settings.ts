@@ -1,7 +1,7 @@
 import {Block} from "../../../../core";
 import {IconsProps} from "../icons.interface";
 
-export class IconSettings extends Block {
+export class IconSettings extends Block<IconsProps> {
     constructor({color = '#BFBFBF', width = 24, height = 24}: IconsProps) {
         super({color, width, height});
     }

@@ -12,7 +12,7 @@ export enum AuthValidator {
     Password = 'password',
 }
 
-export class AuthPage extends Block {
+export class AuthPage extends Block<AuthProps> {
     constructor(props: AuthProps) {
         super({
             ...props

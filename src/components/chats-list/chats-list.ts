@@ -1,7 +1,9 @@
 import Block from '../../../core/Block';
 import "./chats-list.css";
 
-export class ChatsList extends Block {
+interface ChatListProps {}
+
+export class ChatsList extends Block<ChatListProps> {
     protected render(): string {
         // language=hbs
         return `

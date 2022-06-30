@@ -1,7 +1,9 @@
 import {Block} from "../../../core";
 import './messenger.css';
 
-export class MessengerPage extends Block {
+interface MessengerPageProps {}
+
+export class MessengerPage extends Block<MessengerPageProps> {
     protected render(): string {
         // language=hbs
         return `

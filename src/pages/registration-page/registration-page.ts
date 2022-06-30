@@ -5,8 +5,8 @@ import {blurValidationForm, submitFormCheck} from "../../services/form.service";
 import MessengerPage from "../messenger-page";
 
 export enum RegistrationValidator {
-    First_name = 'first_name',
-    Second_name = 'second_name',
+    FirstName = 'first_name',
+    SecondName = 'second_name',
     Login = 'login',
     Email = 'email',
     Phone = 'phone',
@@ -15,7 +15,7 @@ export enum RegistrationValidator {
 
 interface RegistrationPageProps {}
 
-export class RegistrationPage extends Block {
+export class RegistrationPage extends Block<RegistrationPageProps> {
     constructor(props: RegistrationPageProps) {
         super(props);
     }

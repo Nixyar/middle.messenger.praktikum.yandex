@@ -6,7 +6,7 @@ interface MessageWindowProps {
     username: string;
 }
 
-export class MessageWindow extends Block {
+export class MessageWindow extends Block<MessageWindowProps> {
     constructor({profileAvatarUrl = '../../../assets/images/profile-test.png', username = 'Username'}: MessageWindowProps) {
         super({profileAvatarUrl, username});
     }

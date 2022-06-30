@@ -1,7 +1,9 @@
-import {Block} from "@core";
+import {Block} from "../../../core";
 import './error-page.css';
 
-export class ErrorPage extends Block {
+interface ErrorPageProps {}
+
+export class ErrorPage extends Block<ErrorPageProps> {
     protected render(): string {
         // language=hbs
         return ``

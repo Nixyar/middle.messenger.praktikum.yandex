@@ -8,7 +8,7 @@ interface BlockMeta<P = object | unknown> {
 
 type Events = Values<typeof Block.EVENTS>;
 
-export default abstract class Block<P extends {}> {
+export default abstract class Block<Props extends {}> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -20,15 +20,15 @@ export default abstract class Block<P extends {}> {
   _meta: BlockMeta;
 
   protected _element: Nullable<HTMLElement> = null;
-  protected readonly props: P;
-  protected children: {[id: string]: Block<P>} = {};
+  protected readonly props: Props;
+  protected children: {[id: string]: Block<{}>} = {};
 
   eventBus: () => EventBus<Events>;
 
   protected state: any = {};
-  protected refs: {[key: string]: Block<P>} = {};
+  protected refs: {[key: string]: Block<{}>} = {};
 
-  public constructor(props?: P) {
+  public constructor(props?: Props) {
     const eventBus = new EventBus<Events>();
 
     this._meta = {
@@ -37,7 +37,7 @@ export default abstract class Block<P extends {}> {
 
     this.getStateFromProps(props);
 
-    this.props = this._makePropsProxy(props || {} as P);
+    this.props = this._makePropsProxy(props || {} as Props);
     this.state = this._makePropsProxy(this.state);
 
     this.eventBus = () => eventBus;
@@ -68,15 +68,15 @@ export default abstract class Block<P extends {}> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
   }
 
-  _componentDidMount(props: P) {
+  _componentDidMount(props: Props) {
     this.componentDidMount(props);
   }
 
-  componentDidMount(props: P) {
+  componentDidMount(props: Props) {
     return props;
   }
 
-  _componentDidUpdate(oldProps: P, newProps: P) {
+  _componentDidUpdate(oldProps: Props, newProps: Props) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -84,11 +84,11 @@ export default abstract class Block<P extends {}> {
     this._render();
   }
 
-  componentDidUpdate(oldProps: P, newProps: P) {
+  componentDidUpdate(oldProps: Props, newProps: Props) {
     return oldProps !== newProps;
   }
 
-  setProps = (nextProps: P) => {
+  setProps = (nextProps: Props) => {
     if (!nextProps) {
       return;
     }
@@ -158,7 +158,7 @@ export default abstract class Block<P extends {}> {
       deleteProperty() {
         throw new Error('Нет доступа');
       },
-    }) as unknown as P;
+    }) as unknown as Props;
   }
 
   _createDocumentElement(tagName: string) {

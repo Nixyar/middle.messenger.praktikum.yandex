@@ -7,7 +7,7 @@ interface LinkProps {
     linkToFunc?: () => void;
 }
 
-export class Link extends Block {
+export class Link extends Block<any> {
     constructor({text, linkTo, linkToFunc}: LinkProps) {
         super({text, linkTo, events: {click: linkToFunc}});
     }

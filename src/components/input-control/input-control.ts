@@ -13,7 +13,7 @@ interface InputControlProps {
     onFocus?: () => {};
 }
 
-export class InputControl extends Block{
+export class InputControl extends Block<InputControlProps> {
     constructor({label, inputName, type, id, inputValue, placeholder, error, onBlur, onFocus}: InputControlProps) {
         super({label, inputName, type, id, inputValue, placeholder, error, onBlur, onFocus});
     }

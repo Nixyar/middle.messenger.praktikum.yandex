@@ -7,7 +7,7 @@ interface ChatItemProps {
     lastMessage: string;
 }
 
-export class ChatItem extends Block {
+export class ChatItem extends Block<ChatItemProps> {
     constructor({avatar, chatName, lastMessage}: ChatItemProps) {
         super({avatar, chatName, lastMessage});
     }
