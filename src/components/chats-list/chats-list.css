@@ -34,10 +34,14 @@
 .chat-footer button {
     width: 24px;
     height: 24px;
-    fill: #000000;
+    fill: var(--black);
     transition: 0.3s ease-in;
 }
 
 .chat-footer button:hover svg path {
-    fill: #FFFFFF;
+    stroke: var(--white);
+}
+
+svg path {
+    transition: 0.2s ease-in;
 }

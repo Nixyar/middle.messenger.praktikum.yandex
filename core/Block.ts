@@ -2,13 +2,13 @@ import EventBus from './EventBus';
 import {nanoid} from 'nanoid';
 import Handlebars from 'handlebars';
 
-interface BlockMeta<P = any> {
+interface BlockMeta<P = object | unknown> {
   props: P;
 }
 
 type Events = Values<typeof Block.EVENTS>;
 
-export default class Block<P = any> {
+export default abstract class Block<P = object> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',

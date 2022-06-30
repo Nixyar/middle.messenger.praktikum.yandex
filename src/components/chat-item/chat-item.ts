@@ -1,14 +1,14 @@
 import Block from '../../../core/Block';
 import './chat-item.css';
 
-interface chatItemProps {
+interface ChatItemProps {
     avatar: string;
     chatName: string;
     lastMessage: string;
 }
 
 export class ChatItem extends Block {
-    constructor({avatar, chatName, lastMessage}: chatItemProps) {
+    constructor({avatar, chatName, lastMessage}: ChatItemProps) {
         super({avatar, chatName, lastMessage});
     }
 
