@@ -1,43 +1,42 @@
 import EventBus from './EventBus';
-import {nanoid} from 'nanoid';
+import { nanoid } from 'nanoid';
 import Handlebars from 'handlebars';
-
-interface BlockMeta<P = object | unknown> {
-  props: P;
-}
 
 type Events = Values<typeof Block.EVENTS>;
 
-export default abstract class Block<Props extends {}> {
+export interface BlockClass<P> extends Function {
+  new (props: P): Block<P>;
+  componentName?: string;
+}
+
+export default class Block<P = any> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
+    FLOW_CWU: 'flow:component-will-unmount',
     FLOW_RENDER: 'flow:render',
   } as const;
 
   public id = nanoid(6);
-  _meta: BlockMeta;
 
   protected _element: Nullable<HTMLElement> = null;
-  protected readonly props: Props;
-  protected children: {[id: string]: Block<{}>} = {};
+  protected readonly props: P;
+  protected children: { [id: string]: Block } = {};
 
   eventBus: () => EventBus<Events>;
 
   protected state: any = {};
-  protected refs: {[key: string]: Block<{}>} = {};
+  protected refs: { [key: string]: HTMLElement } = {};
 
-  public constructor(props?: Props) {
+  public static componentName?: string;
+
+  public constructor(props?: P) {
     const eventBus = new EventBus<Events>();
-
-    this._meta = {
-      props
-    };
 
     this.getStateFromProps(props);
 
-    this.props = this._makePropsProxy(props || {} as Props);
+    this.props = this._makePropsProxy(props || ({} as P));
     this.state = this._makePropsProxy(this.state);
 
     this.eventBus = () => eventBus;
@@ -47,10 +46,26 @@ export default abstract class Block<Props extends {}> {
     eventBus.emit(Block.EVENTS.INIT, this.props);
   }
 
+  /**
+   * Хелпер, который проверяет, находится ли элемент в DOM дереве
+   * И есть нет, триггерит событие COMPONENT_WILL_UNMOUNT
+   */
+  _checkInDom() {
+    const elementInDOM = document.body.contains(this._element);
+
+    if (elementInDOM) {
+      setTimeout(() => this._checkInDom(), 1000);
+      return;
+    }
+
+    this.eventBus().emit(Block.EVENTS.FLOW_CWU, this.props);
+  }
+
   _registerEvents(eventBus: EventBus<Events>) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
@@ -58,9 +73,9 @@ export default abstract class Block<Props extends {}> {
     this._element = this._createDocumentElement('div');
   }
 
+  // @ts-ignore
   protected getStateFromProps(props: any): void {
     this.state = {};
-    return props;
   }
 
   init() {
@@ -68,15 +83,23 @@ export default abstract class Block<Props extends {}> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
   }
 
-  _componentDidMount(props: Props) {
+  _componentDidMount(props: P) {
+    this._checkInDom();
+
     this.componentDidMount(props);
   }
 
-  componentDidMount(props: Props) {
-    return props;
+  // @ts-ignore
+  componentDidMount(props: P) {}
+
+  _componentWillUnmount() {
+    this.eventBus().destroy();
+    this.componentWillUnmount();
   }
 
-  _componentDidUpdate(oldProps: Props, newProps: Props) {
+  componentWillUnmount() {}
+
+  _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -84,11 +107,13 @@ export default abstract class Block<Props extends {}> {
     this._render();
   }
 
-  componentDidUpdate(oldProps: Props, newProps: Props) {
-    return oldProps !== newProps;
+  componentDidUpdate(oldProps: P, newProps: P) {
+    if (oldProps !== newProps) {
+      return true;
+    }
   }
 
-  setProps = (nextProps: Props) => {
+  setProps = (nextProps: Partial<P>) => {
     if (!nextProps) {
       return;
     }
@@ -122,16 +147,18 @@ export default abstract class Block<Props extends {}> {
 
   protected render(): string {
     return '';
-  };
+  }
 
   getContent(): HTMLElement {
     // Хак, чтобы вызвать CDM только после добавления в DOM
     if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
       setTimeout(() => {
-        if (this.element?.parentNode?.nodeType !==  Node.DOCUMENT_FRAGMENT_NODE ) {
+        if (
+            this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE
+        ) {
           this.eventBus().emit(Block.EVENTS.FLOW_CDM);
         }
-      }, 100)
+      }, 100);
     }
 
     return this.element!;
@@ -152,13 +179,13 @@ export default abstract class Block<Props extends {}> {
 
         // Запускаем обновление компоненты
         // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
         return true;
       },
       deleteProperty() {
         throw new Error('Нет доступа');
       },
-    }) as unknown as Props;
+    }) as unknown as P;
   }
 
   _createDocumentElement(tagName: string) {
@@ -171,7 +198,6 @@ export default abstract class Block<Props extends {}> {
     if (!events || !this._element) {
       return;
     }
-
 
     Object.entries(events).forEach(([event, listener]) => {
       this._element!.removeEventListener(event, listener);
@@ -197,7 +223,12 @@ export default abstract class Block<Props extends {}> {
      * Рендерим шаблон
      */
     const template = Handlebars.compile(this.render());
-    fragment.innerHTML = template({ ...this.state, ...this.props, children: this.children, refs: this.refs });
+    fragment.innerHTML = template({
+      ...this.state,
+      ...this.props,
+      children: this.children,
+      refs: this.refs,
+    });
 
     /**
      * Заменяем заглушки на компоненты
@@ -235,7 +266,6 @@ export default abstract class Block<Props extends {}> {
      */
     return fragment.content;
   }
-
 
   show() {
     this.getContent().style.display = 'block';

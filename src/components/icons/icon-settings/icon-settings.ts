@@ -1,9 +1,9 @@
 import {Block} from "../../../../core";
 import {IconsProps} from "../icons.interface";
 
-export class IconSettings extends Block<IconsProps> {
-    constructor({color = '#BFBFBF', width = 24, height = 24}: IconsProps) {
-        super({color, width, height});
+export class IconSettings extends Block {
+    constructor({color = '#BFBFBF', width = 24, height = 24, onClick}: IconsProps) {
+        super({color, width, height, events: {click: onClick}});
     }
 
     protected render(): string {

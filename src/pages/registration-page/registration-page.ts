@@ -1,8 +1,7 @@
-import {Block, renderDOM} from "../../../core";
+import {Block} from "../../../core";
 import '../auth-page/auth.css';
-import AuthPage from "../auth-page";
 import {blurValidationForm, submitFormCheck} from "../../services/form.service";
-import MessengerPage from "../messenger-page";
+import {HTTPTransportService} from "../../services/HTTPTransport.service";
 
 export enum RegistrationValidator {
     FirstName = 'first_name',
@@ -18,6 +17,12 @@ interface RegistrationPageProps {}
 export class RegistrationPage extends Block<RegistrationPageProps> {
     constructor(props: RegistrationPageProps) {
         super(props);
+    }
+
+    componentDidMount() {
+        if (window.store.getState().user) {
+            window.router.go('/messenger');
+        }
     }
 
     protected getStateFromProps() {
@@ -50,12 +55,15 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
                 if (submitCheck) {
                     this.setState(submitCheck);
                 } else {
+                    const http = new HTTPTransportService();
+                    http.post('/auth/signup', {data: values}).then(() => {
+                        http.get('/auth/user').then((user: UserInfo | any) => {
+                            window.store.dispatch(JSON.parse(user.response));
+                            window.router.go('/messenger');
+                        });
+                    });
                     console.log('Registration Form', values);
-                    renderDOM(new MessengerPage({}));
                 }
-            },
-            toAuthPage: () => {
-                renderDOM(new AuthPage({}));
             }
         };
     }
@@ -64,8 +72,9 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
         const {values, errors} = this.state;
         // language=hbs
         return `
-            <main class="sign-container">
-                <form class="sign__form">
+            <main>
+                <div class="sign-container">
+                    <form class="sign__form">
                     <h1 class="sign__title h1">Sign up</h1>
                     {{{InputControl inputName="first_name" label="First name" inputValue="${values.first_name}" error="${errors.first_name}"
                                     id="first_name" onBlur=onBlur onFocus=onFocus}}}
@@ -81,8 +90,9 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
                                     id="password" onBlur=onBlur onFocus=onFocus}}}
                     {{{Button type="submit" classes="sign" textBtn="Sign up" onClick=onSubmit}}}
 
-                    <div class="sign__form--link p1">Already have an account? {{{Link text="Sign in" linkToFunc=toAuthPage}}}</div>
+                    <div class="sign__form--link p1">Already have an account? {{{Link text="Sign in" linkTo="/"}}}</div>
                 </form>
+                </div>
             </main>
         `
     }

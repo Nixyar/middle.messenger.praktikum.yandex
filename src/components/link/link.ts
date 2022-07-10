@@ -3,19 +3,16 @@ import './link.css';
 
 interface LinkProps {
     text: string;
-    linkTo?: string;
-    linkToFunc?: () => void;
+    to: string;
 }
 
-export class Link extends Block<any> {
-    constructor({text, linkTo, linkToFunc}: LinkProps) {
-        super({text, linkTo, events: {click: linkToFunc}});
+export class Link extends Block {
+    constructor(props: LinkProps) {
+        super({ ...props });
     }
 
-    protected render(): string {
+    render() {
         // language=hbs
-        return `
-            <a class="p1" {{#if linkTo}}href="{{linkTo}}"{{/if}}>{{text}}</a>
-        `;
+        return `<a class="p1" href={{linkTo}}>{{text}}</a>`;
     }
 }
