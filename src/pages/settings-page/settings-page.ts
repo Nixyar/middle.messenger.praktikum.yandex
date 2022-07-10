@@ -32,7 +32,7 @@ export class SettingsPage extends Block<SettingsPageProps> {
                 }
             },
             backToMessage: () => {
-                window.router.back();
+                window.router.go('/messenger');
             },
             onSubmitChange: (event: Event) => {
                 event.preventDefault();

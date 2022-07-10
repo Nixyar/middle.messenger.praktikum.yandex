@@ -267,11 +267,11 @@ export default class Block<P = any> {
     return fragment.content;
   }
 
-  show() {
-    this.getContent().style.display = 'block';
-  }
-
-  hide() {
-    this.getContent().style.display = 'none';
-  }
+  // show() {
+  //   this.getContent().style.display = 'block';
+  // }
+  //
+  // hide() {
+  //   this.getContent().style.display = 'none';
+  // }
 }

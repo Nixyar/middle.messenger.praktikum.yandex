@@ -27,9 +27,9 @@ export class Route<Props = any> {
     }
 
     leave() {
-        if (this.#block) {
-            this.#block.hide();
-        }
+        // if (this.#block) {
+        //     this.#block.hide();
+        // }
     }
 
     match(pathname: string) {
@@ -42,7 +42,7 @@ export class Route<Props = any> {
             renderDOM(this.#block);
         }
 
-        this.#block.show();
+        // this.#block.show();
     }
 }
 
