@@ -1,5 +1,5 @@
-import EventBus from './EventBus';
 import { nanoid } from 'nanoid';
+import EventBus from './EventBus';
 import Handlebars from 'handlebars';
 
 type Events = Values<typeof Block.EVENTS>;
@@ -107,10 +107,9 @@ export default class Block<P = any> {
     this._render();
   }
 
+  // @ts-ignore
   componentDidUpdate(oldProps: P, newProps: P) {
-    if (oldProps !== newProps) {
-      return true;
-    }
+    return true;
   }
 
   setProps = (nextProps: Partial<P>) => {
@@ -154,7 +153,7 @@ export default class Block<P = any> {
     if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
       setTimeout(() => {
         if (
-            this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE
+          this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE
         ) {
           this.eventBus().emit(Block.EVENTS.FLOW_CDM);
         }
@@ -242,23 +241,11 @@ export default class Block<P = any> {
       if (!stub) {
         return;
       }
-
-      const stubChilds = stub.childNodes.length ? stub.childNodes : [];
-
       /**
        * Заменяем заглушку на component._element
        */
       const content = component.getContent();
       stub.replaceWith(content);
-
-      /**
-       * Ищем элемент layout-а, куда вставлять детей
-       */
-      const layoutContent = content.querySelector('[data-layout="1"]');
-
-      if (layoutContent && stubChilds.length) {
-        layoutContent.append(...stubChilds);
-      }
     });
 
     /**
@@ -267,11 +254,11 @@ export default class Block<P = any> {
     return fragment.content;
   }
 
-  // show() {
-  //   this.getContent().style.display = 'block';
-  // }
-  //
-  // hide() {
-  //   this.getContent().style.display = 'none';
-  // }
+  show() {
+    this.getContent().style.display = 'block';
+  }
+
+  hide() {
+    this.getContent().style.display = 'none';
+  }
 }

@@ -1,1 +1,1 @@
-export { AuthPage as default } from './auth-page';
+export { default } from './auth-page';

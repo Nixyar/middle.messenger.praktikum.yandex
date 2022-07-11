@@ -19,12 +19,12 @@ export class MessengerPage extends Block<MessengerPageProps> {
         const {chats} = this.state;
         // language=hbs
         return `
-            <main>
+            {{#Layout name="Messenger"}}
                 <div class="messenger-page">
                     {{{ChatsList chatList="${chats}"}}}
                     {{{MessageWindow}}}
                 </div>
-            </main>
+            {{/Layout}}
         `
     }
 }

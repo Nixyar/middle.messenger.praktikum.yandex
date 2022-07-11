@@ -1,9 +1,9 @@
 import {BlockClass} from "../../core/Block";
 import {RegistrationPage} from "../pages/registration-page/registration-page";
 import MessengerPage from "../pages/messenger-page";
-import AuthPage from "../pages/auth-page";
 import ErrorPage from "../pages/error-page";
 import {SettingsPage} from "../pages/settings-page/settings-page";
+import { AuthPage } from '../pages/auth-page/auth-page';
 
 export enum Screens {
     Login = 'login',

@@ -32,7 +32,7 @@ export class SettingsPage extends Block<SettingsPageProps> {
                 }
             },
             backToMessage: () => {
-                window.router.go('/messenger');
+                window.router.back();
             },
             onSubmitChange: (event: Event) => {
                 event.preventDefault();
@@ -84,7 +84,7 @@ export class SettingsPage extends Block<SettingsPageProps> {
         const {values} = this.state;
         // language=hbs
         return `
-            <main>
+            {{#Layout name="Settings"}}
                 {{{ChatHeader}}}
                 {{{Button textBtn="Назад" onClick=backToMessage}}}
                 <form class="settings-form p2" id="settings-form">
@@ -100,7 +100,7 @@ export class SettingsPage extends Block<SettingsPageProps> {
                                     onBlur=onBlur id="password"}}}
                     {{{Button type="submit" textBtn="Изменить" classes="sign" onClick=onSubmitChange}}}
                 </form>
-            </main>
+            {{/Layout}}
         `;
     }
 }

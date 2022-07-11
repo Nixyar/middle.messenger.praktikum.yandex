@@ -1,4 +1,4 @@
-import {registerComponent, Router, Store} from '../core/index';
+import { registerComponent, Router, Store } from '../core/index';
 // Components import
 import Button from "./components/button";
 import Input from "./components/input-control/input";

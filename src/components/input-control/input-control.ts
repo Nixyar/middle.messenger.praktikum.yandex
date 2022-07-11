@@ -21,7 +21,7 @@ export class InputControl extends Block {
     protected render(): string {
         // language=hbs
         return `
-            <label for="id">
+            <label for="{{id}}">
                 {{#if label}}<p class="p1">{{label}}</p>{{/if}}
                 {{{Input id=id inputName=inputName placeholder=placeholder type=type value=inputValue onFocus=onFocus onBlur=onBlur}}}
                 <div class="input__error">{{error}}</div>
