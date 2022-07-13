@@ -10,7 +10,7 @@ Added class for work with requests.
 
 ## Domain on Netlify
 
-https://jolly-souffle-0cce95.netlify.app/
+https://deploy-preview-19--jolly-souffle-0cce95.netlify.app/
 
 ## Install project
 
