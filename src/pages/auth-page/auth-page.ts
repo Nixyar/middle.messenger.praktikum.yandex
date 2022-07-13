@@ -1,4 +1,4 @@
-import { Block, Router, Store } from '../../../core/index';
+import { Block, BrowseRouter, Store } from '../../../core/index';
 // Services
 import { blurValidationForm, submitFormCheck } from '../../services/form.service';
 import { HTTPTransportService } from '../../services/HTTPTransport.service';
@@ -8,7 +8,7 @@ import './auth.css';
 import { withRouter, withStore } from '../../utils';
 
 type LoginPageProps = {
-  router: Router;
+  router: BrowseRouter;
   store: Store<AppState>;
 };
 

@@ -1,4 +1,4 @@
-import { Block, Router, Store } from '../../../core';
+import { Block, BrowseRouter, Store } from '../../../core';
 import '../auth-page/auth.css';
 import { blurValidationForm, submitFormCheck } from '../../services/form.service';
 import { HTTPTransportService } from '../../services/HTTPTransport.service';
@@ -14,7 +14,7 @@ export enum RegistrationValidator {
 }
 
 interface RegistrationPageProps {
-  router: Router;
+  router: BrowseRouter;
   store: Store<AppState>;
 }
 

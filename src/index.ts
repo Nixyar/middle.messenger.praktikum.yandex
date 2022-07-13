@@ -1,4 +1,4 @@
-import { registerComponent, Router, Store } from '../core/index';
+import { registerComponent, BrowseRouter, Store } from '../core/index';
 // Components import
 import Button from "./components/button";
 import Input from "./components/input-control/input";
@@ -19,7 +19,6 @@ import {initAppService} from "./services/initApp.service";
 import IconDelete from "./components/icons/icon-delete";
 // Utils
 import {getScreenComponent, Screens} from "./utils/screenList";
-
 registerComponent('Button', Button);
 registerComponent('ChatItem', ChatItem);
 registerComponent('ChatsList', ChatsList);
@@ -37,10 +36,11 @@ registerComponent('IconProfile', IconProfile);
 registerComponent('IconPhone', IconPhone);
 registerComponent('IconDelete', IconDelete);
 
+
 declare global {
     interface Window {
         store: Store<AppState>
-        router: Router
+        router: BrowseRouter
     }
 }
 
@@ -52,7 +52,7 @@ export const defaultState: AppState = {
 
 document.addEventListener("DOMContentLoaded", () => {
     const store = new Store<AppState>(defaultState);
-    const router = new Router();
+    const router = new BrowseRouter();
 
     window.store = store;
     window.router = router;
