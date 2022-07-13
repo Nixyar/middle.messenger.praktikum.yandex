@@ -31,16 +31,26 @@ export class HTTPTransportService {
         return this.request(url, {...options, method: METHODS.DELETE});
     };
 
-    request = (url: string, options: { method: any; data?: any; }, timeout = 5000) => {
+    request = (url: string, options: { method: any; data?: any }, timeout = 4000) => {
         const {method, data} = options;
-        return new Promise((resolve, reject) => {
+
+        return new Promise((resolve: any, reject: any) => {
             const xhr = new XMLHttpRequest();
+            const formData = new FormData();
 
-            url = method === 'GET' ? url + queryStringify(data) : url;
-            xhr.open(method, url);
+            const urlEnd = (method === 'GET') && data ? url + queryStringify(data) : url
+
+            xhr.open(method, `${process.env.API_ENDPOINT}${urlEnd}`);
+            if (!(data instanceof File)) {
+                xhr.setRequestHeader('Content-Type', 'application/json');
+            }
+            if (data instanceof File) {
+                formData.append('avatar', data)
+            }
             xhr.timeout = timeout;
+            xhr.withCredentials = true;
 
-            xhr.onload = function() {
+            xhr.onload = function () {
                 resolve(xhr);
             };
 
@@ -48,11 +58,15 @@ export class HTTPTransportService {
             xhr.onabort = reject;
             xhr.onerror = reject;
 
-            if(method === 'GET') {
+            if (method === 'GET') {
                 xhr.send();
             } else {
-                xhr.send(data);
+                if (data instanceof File) {
+                    xhr.send(formData);
+                } else {
+                    xhr.send(JSON.stringify(data));
+                }
             }
         });
-    };
+    }
 }

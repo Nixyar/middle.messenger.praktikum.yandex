@@ -1,0 +1,52 @@
+@import "../../../../assets/styles/colors-variables.css";
+
+.message-window {
+    width: 81%;
+}
+
+.message-window__chat {
+    height: calc(100% - 70px);
+    background-color: var(--light-grey);
+}
+
+.chat-control {
+    display: flex;
+    align-items: center;
+}
+
+.chat-control button {
+    margin-right: 24px;
+    transition: 0.3s ease;
+}
+
+.chat-control button:hover svg path {
+    fill: #FFFFFF;
+}
+
+.message-window__chat-view {
+    height: calc(100% - 72px);
+}
+
+.message-window__chat-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+
+}
+
+.message-window__chat-control label {
+    width: 100%;
+    height: 47px;
+    margin-right: 12px;
+}
+
+.message-window__chat-control label input {
+    width: 100%;
+    height: 100%;
+    margin-right: 12px;
+}
+
+.message-window__chat-control button {
+    margin: 0;
+}

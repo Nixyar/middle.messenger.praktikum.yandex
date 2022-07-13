@@ -10,7 +10,7 @@ Added class for work with requests.
 
 ## Domain on Netlify
 
-https://deploy--jolly-souffle-0cce95.netlify.app/auth.page.html
+https://jolly-souffle-0cce95.netlify.app/
 
 ## Install project
 

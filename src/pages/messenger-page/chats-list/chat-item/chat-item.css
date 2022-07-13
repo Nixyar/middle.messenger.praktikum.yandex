@@ -1,0 +1,32 @@
+@import "../../../../../assets/styles/colors-variables.css";
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--grey);
+    background-color: var(--white);
+    padding: 8px 12px;
+    overflow: hidden;
+    border-radius: 12px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.chat-item:hover {
+    background-color: var(--lighter-grey);
+}
+
+.chat-item__img {
+    margin-right: 12px;
+}
+
+.chat-item__img img {
+    width: 48px;
+    height: 48px;
+}
+
+.chat-item__information-title {
+    color: var(--dark-grey);
+    margin-bottom: 8px;
+}
