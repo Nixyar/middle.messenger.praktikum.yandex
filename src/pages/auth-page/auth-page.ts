@@ -1,7 +1,7 @@
 import { Block, BrowseRouter, Store } from '../../../core/index';
 // Services
 import { blurValidationForm, submitFormCheck } from '../../services/form.service';
-import { HTTPTransportService } from '../../services/HTTPTransport.service';
+import { submitSign } from '../../services/submitForm.service';
 // Styles
 import './auth.css';
 // Utils
@@ -45,16 +45,7 @@ export class AuthPage extends Block<LoginPageProps> {
         if (submitCheck) {
           this.setState(submitCheck);
         } else {
-          const http = new HTTPTransportService();
-          http.post('/auth/signin', { data: values })
-            .then(() => {
-              http.get('/auth/user')
-                .then((user: UserInfo | any) => {
-                  window.store.dispatch(JSON.parse(user.response));
-                  window.router.go('/messenger');
-                });
-            });
-          console.log('Login Form', values);
+          submitSign(values, '/auth/signin');
         }
       }
     };

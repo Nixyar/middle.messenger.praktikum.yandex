@@ -1,8 +1,8 @@
 import { Block, BrowseRouter, Store } from '../../../core';
 import '../auth-page/auth.css';
 import { blurValidationForm, submitFormCheck } from '../../services/form.service';
-import { HTTPTransportService } from '../../services/HTTPTransport.service';
 import { withRouter, withStore } from '../../utils';
+import { submitSign } from '../../services/submitForm.service';
 
 export enum RegistrationValidator {
   FirstName = 'first_name',
@@ -31,7 +31,7 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
         login: '',
         email: '',
         phone: '',
-        password: ''
+        password: '',
       },
       errors: {
         first_name: '',
@@ -50,25 +50,16 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
         this.setState(blurValidationForm(input, values, errors));
       },
       onSubmit: (evt: SubmitEvent) => {
-        evt.preventDefault();
         const {
           values,
           errors
         } = this.state;
+        evt.preventDefault();
         const submitCheck = submitFormCheck(values, errors);
-        if (submitCheck) {
+        if (!submitCheck) {
           this.setState(submitCheck);
         } else {
-          const http = new HTTPTransportService();
-          http.post('/auth/signup', { data: values })
-            .then(() => {
-              http.get('/auth/user')
-                .then((user: UserInfo | any) => {
-                  window.store.dispatch(JSON.parse(user.response));
-                  window.router.go('/messenger');
-                });
-            });
-          console.log('Registration Form', values);
+          submitSign(values, '/auth/signup');
         }
       }
     };
