@@ -1,13 +1,12 @@
 import Block from '../../../../core/Block';
 import "./chats-list.css";
-import {HTTPTransportService} from "../../../services/HTTPTransport.service";
+import { createChat, getChats, logout } from '../../../services/messengerApi.service';
 
 interface ChatListProps {
     chatList: ChatItem[];
 }
 
 export class ChatsList extends Block {
-    http = new HTTPTransportService();
     constructor(props: ChatListProps) {
         super(props);
     }
@@ -20,18 +19,18 @@ export class ChatsList extends Block {
         this.state = {
             chats: null,
             getNewListChat: () => {
-                this.http.get('/chats').then((chats: XMLHttpRequest | any) => {
+                getChats().then((chats: XMLHttpRequest | any) => {
                     this.state.chats = JSON.parse(chats.response);
                 });
             },
-            createChat: (chatName: string) => {
-                this.http.post('/chats', {data: {title: chatName || 'New chat'}}).then(() => {
+            createChat: () => {
+                createChat().then(() => {
                     this.state.getNewListChat();
                 });
             },
             onLogout: (evt: Event) => {
                 evt.preventDefault();
-                this.http.post('/auth/logout').then(() => {
+                logout().then(() => {
                     window.store.dispatch({user: null});
                     window.router.go('/');
                 });

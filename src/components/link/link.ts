@@ -1,6 +1,6 @@
 import Block from '../../../core/Block';
 import './link.css';
-// import BrowseRouter from '../../../core/BrowserRouter';
+import BrowseRouter from '../../../core/BrowserRouter';
 
 interface LinkProps {
     text: string;
@@ -9,10 +9,10 @@ interface LinkProps {
 
 export class Link extends Block {
     constructor(props: LinkProps) {
-        const onClick = () => {
-            // e.preventDefault();
-            // const router = new BrowseRouter();
-            // router.go(this.props.to);
+        const onClick = (e: Event) => {
+            e.preventDefault();
+            const router = new BrowseRouter();
+            router.go(this.props.to);
         };
         super({ ...props, events: {click: onClick} });
     }

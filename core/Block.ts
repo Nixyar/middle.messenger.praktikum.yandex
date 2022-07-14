@@ -97,6 +97,19 @@ export default class Block<P = any> {
     this.componentWillUnmount();
   }
 
+  public dispatchComponentWillUnmount() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CWU);
+    this._unmount();
+  }
+
+  private _unmount() {
+    this._removeEvents();
+
+    if (this._element) {
+      this._element.remove();
+    }
+  }
+
   componentWillUnmount() {}
 
   _componentDidUpdate(oldProps: P, newProps: P) {
