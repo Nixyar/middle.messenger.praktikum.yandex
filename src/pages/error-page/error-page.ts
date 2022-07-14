@@ -1,32 +1,33 @@
-import { Block, Router, Store } from '../../../core';
+import { Block, BrowseRouter, Store } from '../../../core';
 import './error-page.css';
 import { withRouter, withStore } from '../../utils';
-import { RegistrationPage } from '../registration-page/registration-page';
 
 interface ErrorPageProps {
-    router: Router;
-    store: Store<AppState>;
+  router: BrowseRouter;
+  store: Store<AppState>;
 }
 
 export class ErrorPage extends Block<ErrorPageProps> {
-    constructor(props: ErrorPageProps) {
-        super(props);
-    }
-    protected getStateFromProps() {
-        this.state = {
-            goBack: () => {
-                this.props.router.go('/');
-            }
-        };
-    }
-    protected render(): string {
-        // language=hbs
-        return `
-            {{#Layout name="Settings"}}
-                {{{Button classes="sign" textBtn="Go back" onClick=onSubmit}}}
-            {{/Layout}}
-        `
-    }
+  constructor(props: ErrorPageProps) {
+    super(props);
+  }
+
+  protected getStateFromProps() {
+    this.state = {
+      goBack: () => {
+        this.props.router.go('/');
+      }
+    };
+  }
+
+  protected render(): string {
+    // language=hbs
+    return `
+        <main>
+            {{{Button classes="sign" textBtn="Go back" onClick=onSubmit}}}
+        </main>
+        `;
+  }
 }
 
-export default withRouter(withStore(RegistrationPage))
+export default withRouter(withStore(ErrorPage));

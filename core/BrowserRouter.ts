@@ -27,7 +27,7 @@ class Route <P = any>{
     }
     leave() {
         if (this.#block) {
-            this.#block.hide();
+            this.#block.dispatchComponentWillUnmount();
         }
     }
     match(pathname: string) {
@@ -36,21 +36,10 @@ class Route <P = any>{
         }
         return isEqual(pathname, this.#pathname);
     }
-    #prefixHandler() {
-        const id = Number(window.location.pathname.replace(/[a-zA-Z/]+/, ''));
-        return {id};
-    }
     render() {
-        const {id} = this.#prefixHandler();
-        if (!this.#block) {
-            // @ts-ignore
-            this.#block = new this.#blockClass({...this.#props, idPath: id});
-            renderDOM(this.#block)
-            return;
-        }
-
-        this.#block.setProps({idPath: id});
-        this.#block.show();
+        // @ts-ignore
+        this.#block = new this.#blockClass({...this.#props});
+        renderDOM(this.#block)
     }
 }
 

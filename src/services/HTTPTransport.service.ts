@@ -38,7 +38,7 @@ export class HTTPTransportService {
             const xhr = new XMLHttpRequest();
             const formData = new FormData();
 
-            const urlEnd = (method === 'GET') && data ? url + queryStringify(data) : url
+            const urlEnd = METHODS.GET && data ? url + queryStringify(data) : url
 
             xhr.open(method, `${process.env.API_ENDPOINT}${urlEnd}`);
             if (!(data instanceof File)) {
