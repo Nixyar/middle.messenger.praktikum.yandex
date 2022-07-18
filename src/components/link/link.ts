@@ -1,21 +1,24 @@
 import Block from '../../../core/Block';
 import './link.css';
+import BrowseRouter from '../../../core/BrowserRouter';
 
 interface LinkProps {
     text: string;
-    linkTo?: string;
-    linkToFunc?: () => void;
+    to: string;
 }
 
-export class Link extends Block<any> {
-    constructor({text, linkTo, linkToFunc}: LinkProps) {
-        super({text, linkTo, events: {click: linkToFunc}});
+export class Link extends Block {
+    constructor(props: LinkProps) {
+        const onClick = (e: Event) => {
+            e.preventDefault();
+            const router = new BrowseRouter();
+            router.go(this.props.to);
+        };
+        super({ ...props, events: {click: onClick} });
     }
 
-    protected render(): string {
+    render() {
         // language=hbs
-        return `
-            <a class="p1" {{#if linkTo}}href="{{linkTo}}"{{/if}}>{{text}}</a>
-        `;
+        return `<a class="p1" href={{to}}>{{text}}</a>`;
     }
 }

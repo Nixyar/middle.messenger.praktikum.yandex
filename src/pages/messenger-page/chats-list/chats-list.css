@@ -1,4 +1,4 @@
-@import "../../../assets/styles/colors-variables.css";
+@import "../../../../assets/styles/colors-variables.css";
 
 .chats {
     display: flex;
@@ -12,6 +12,10 @@
 .search-block {
     height: 70px;
     padding: 12px 24px;
+}
+
+.chat-main {
+    overflow: scroll;
 }
 
 .chat-list {

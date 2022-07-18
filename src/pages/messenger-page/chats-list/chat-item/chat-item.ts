@@ -1,15 +1,16 @@
-import Block from '../../../core/Block';
+import Block from '../../../../../core/Block';
 import './chat-item.css';
 
 interface ChatItemProps {
     avatar: string;
     chatName: string;
     lastMessage: string;
+    id: number;
 }
 
-export class ChatItem extends Block<ChatItemProps> {
-    constructor({avatar, chatName, lastMessage}: ChatItemProps) {
-        super({avatar, chatName, lastMessage});
+export class ChatItem extends Block {
+    constructor({avatar, chatName, lastMessage, id}: ChatItemProps) {
+        super({avatar, chatName, lastMessage, id});
     }
 
     protected render(): string {
@@ -17,7 +18,7 @@ export class ChatItem extends Block<ChatItemProps> {
         return `
             <div class="chat-item">
                 <div class="chat-item__img">
-                    <img src="{{avatar}}" alt="avatar">
+<!--                    <img src="{{avatar}}" alt="avatar">-->
                 </div>
                 <div class="chat-item__information">
                     <p class="chat-item__information-title p2">{{chatName}}</p>

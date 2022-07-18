@@ -1,64 +1,69 @@
-import {Block, renderDOM} from "../../../core/index";
+import { Block, BrowseRouter, Store } from '../../../core/index';
+// Services
+import { blurValidationForm, submitFormCheck } from '../../services/form.service';
+import { submitSign } from '../../services/submitForm.service';
+// Styles
 import './auth.css';
-import {RegistrationPage} from "../registration-page/registration-page";
-import {blurValidationForm, submitFormCheck} from "../../services/form.service";
-import MessengerPage from "../messenger-page";
+// Utils
+import { withRouter, withStore } from '../../utils';
 
-interface AuthProps {
-}
+type LoginPageProps = {
+  router: BrowseRouter;
+  store: Store<AppState>;
+};
 
-export enum AuthValidator {
-    Login = 'login',
-    Password = 'password',
-}
+export class AuthPage extends Block<LoginPageProps> {
+  constructor(props: LoginPageProps) {
+    super(props);
+  }
 
-export class AuthPage extends Block<AuthProps> {
-    constructor(props: AuthProps) {
-        super({
-            ...props
-        });
-    }
-
-    protected getStateFromProps() {
-        this.state = {
-            values: {
-                login: '',
-                password: '',
-            },
-            errors: {
-                login: '',
-                password: '',
-            },
-            onBlur: (evt: FocusEvent) => {
-                const {values, errors} = this.state;
-                const input = evt.target as HTMLInputElement;
-                this.setState(blurValidationForm(input, values, errors));
-            },
-            onSubmit: (evt: SubmitEvent) => {
-                evt.preventDefault();
-                const {values, errors} = this.state;
-                const submitCheck = submitFormCheck(values, errors);
-                if (submitCheck) {
-                    this.setState(submitCheck);
-                } else {
-                    console.log('Login Form', values);
-                    renderDOM(new MessengerPage({}));
-                }
-            },
-            toRegistration: () => {
-                renderDOM(new RegistrationPage({}));
-            },
+  protected getStateFromProps() {
+    this.state = {
+      values: {
+        login: '',
+        password: '',
+      },
+      errors: {
+        login: '',
+        password: '',
+      },
+      onBlur: (evt: FocusEvent) => {
+        const {
+          values,
+          errors
+        } = this.state;
+        const input = evt.target as HTMLInputElement;
+        this.setState(blurValidationForm(input, values, errors));
+      },
+      onSubmit: (evt: SubmitEvent) => {
+        evt.preventDefault();
+        const {
+          values,
+          errors
+        } = this.state;
+        const submitCheck = submitFormCheck(values, errors);
+        if (submitCheck) {
+          this.setState(submitCheck);
+        } else {
+          submitSign(values, '/auth/signin');
         }
-    }
+      }
+    };
+  }
 
-    protected render(): string {
-        const {values, errors} = this.state;
-        // language=hbs
-        return `
-            <main class="sign-container">
+  protected render(): string {
+    const {
+      values,
+      errors
+    } = this.state;
+    // language=hbs
+    return `
+        <main>
+            <div class="sign-container">
                 <form class="sign__form">
                     <h1 class="sign__title h1">Sign in</h1>
-                    {{{InputControl inputName="login" label="Login" inputValue="${values.login}" error="${errors.login}"
+                    {{{InputControl inputName="login" label="Login" inputValue="${values.login}"
+                                    error="${errors.login}"
                                     id="login"
                                     onBlur=onBlur
                                     onFocus=onFocus}}}
@@ -68,9 +73,14 @@ export class AuthPage extends Block<AuthProps> {
                                     error="${errors.password}"
                                     id="password" onFocus=onFocus}}}
                     {{{Button type="submit" classes="sign" textBtn="Sign in" onClick=onSubmit}}}
-                    <div class="sign__form--link p1">{{{Link text="Sign up" linkToFunc=toRegistration}}} for new user</div>
+                    <div class="sign__form--link p1">{{{Link text="Sign up" to="/sign-up"}}} for new
+                        user
+                    </div>
                 </form>
-            </main>
-        `
-    };
+            </div>
+        </main>
+    `;
+  };
 }
+
+export default withRouter(withStore(AuthPage));

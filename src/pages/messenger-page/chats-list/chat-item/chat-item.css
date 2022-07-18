@@ -1,7 +1,9 @@
-@import "../../../assets/styles/colors-variables.css";
+@import "../../../../../assets/styles/colors-variables.css";
 
 .chat-item {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     color: var(--grey);
     background-color: var(--white);
     padding: 8px 12px;

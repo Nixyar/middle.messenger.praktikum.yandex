@@ -1,7 +1,7 @@
 import {validateForm} from "./validatorForm.service";
 
 export function blurValidationForm(input: HTMLInputElement, values: object, errors?: object): object {
-    const value = input.value;
+    const value = input.value.replace("(?i)(\\b)(on\\S+)(\\s*)=|javascript:|(<\\s*)(\\/*)script|style(\\s*)=|(<\\s*)meta", "");
     const data = {...values};
     const error = {...errors};
 

@@ -13,10 +13,10 @@ interface InputProps {
     events?: {};
 }
 
-export class Input extends Block<any> {
-    constructor({type = 'text', placeholder, inputName, value, error, onFocus, onBlur}: InputProps) {
+export class Input extends Block {
+    constructor({type = 'text', id, placeholder, inputName, value, error, onFocus, onBlur}: InputProps) {
         super({
-            type, placeholder, inputName, value, error,
+            type, id, placeholder, inputName, value, error,
             events: {
                 focus: onFocus,
                 blur: onBlur,
@@ -28,7 +28,7 @@ export class Input extends Block<any> {
         // language=hbs
         return `
             <input class="input p1" type="{{type}}" placeholder="{{placeholder}}" name="{{inputName}}"
-                   value="{{value}}">
+                   value="{{value}}" id="{{id}}">
         `;
     }
 }

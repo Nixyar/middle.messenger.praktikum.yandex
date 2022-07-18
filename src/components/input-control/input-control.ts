@@ -13,7 +13,7 @@ interface InputControlProps {
     onFocus?: () => {};
 }
 
-export class InputControl extends Block<InputControlProps> {
+export class InputControl extends Block {
     constructor({label, inputName, type, id, inputValue, placeholder, error, onBlur, onFocus}: InputControlProps) {
         super({label, inputName, type, id, inputValue, placeholder, error, onBlur, onFocus});
     }
@@ -21,7 +21,7 @@ export class InputControl extends Block<InputControlProps> {
     protected render(): string {
         // language=hbs
         return `
-            <label for="id">
+            <label for="{{id}}">
                 {{#if label}}<p class="p1">{{label}}</p>{{/if}}
                 {{{Input id=id inputName=inputName placeholder=placeholder type=type value=inputValue onFocus=onFocus onBlur=onBlur}}}
                 <div class="input__error">{{error}}</div>

@@ -1,9 +1,7 @@
 import Block from '../../../core/Block';
 import './search-input.css';
 
-interface SearchInputProps {}
-
-export class SearchInput extends Block<SearchInputProps> {
+export class SearchInput extends Block {
     constructor() {
         super();
     }
