@@ -1,7 +1,6 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "alpha-value-notation": "number",
-    "selector-class-pattern": null
+    "indentation": 4
   }
 }

@@ -62,7 +62,7 @@ export class SettingsPage extends Block<SettingsPageProps> {
         }
 
         if (values.first_name || values.second_name || values.login || values.phone) {
-          const sendProfileInfo: sendProfileInfoType = {
+          const sendProfileInfo: any = {
             first_name: '',
             second_name: '',
             display_name: '',
@@ -70,13 +70,15 @@ export class SettingsPage extends Block<SettingsPageProps> {
             email: '',
             phone: '',
           };
-          const profileStore: User | null = window.store.getState().user;
+          const profileStore: User | any = window.store.getState().user;
           for (const key in values as sendProfileInfoType) {
             if (key !== 'avatar' && key !== 'password' && key !== 'display_name') {
-              if (values[key]) {
-                sendProfileInfo[key] = values[key];
-              } else {
-                sendProfileInfo[key] = profileStore[key] || null;
+              if (values.hasOwnProperty(key)) {
+                if (values[key]) {
+                  sendProfileInfo[key] = values[key];
+                } else {
+                  sendProfileInfo[key] = profileStore[key] || null;
+                }
               }
             } else if (key === 'display_name') {
               sendProfileInfo[key] = `${sendProfileInfo['second_name']} ${sendProfileInfo['first_name']}`;
