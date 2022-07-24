@@ -8,7 +8,7 @@ export function getChats(): Promise<Indexed | unknown> {
   return http.get('/chats');
 }
 
-export function createChat(chatName: string = 'New chat'): Promise<Indexed | unknown> {
+export function createChat(chatName = 'New chat'): Promise<Indexed | unknown> {
   return http.post('/chats', {data: {title: chatName}});
 }
 

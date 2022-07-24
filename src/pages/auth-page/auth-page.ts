@@ -80,7 +80,7 @@ export class AuthPage extends Block<LoginPageProps> {
             </div>
         </main>
     `;
-  };
+  }
 }
 
 export default withRouter(withStore(AuthPage));

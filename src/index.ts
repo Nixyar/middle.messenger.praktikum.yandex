@@ -1,4 +1,4 @@
-import { registerComponent, BrowseRouter, Store } from '../core/index';
+import { BrowseRouter, registerComponent, Store } from '../core/index';
 // Components import
 import Button from "./components/button";
 import Input from "./components/input-control/input";
@@ -15,10 +15,13 @@ import IconSearch from "./components/icons/icon-search";
 import IconSettings from "./components/icons/icon-settings";
 import IconProfile from "./components/icons/icon-profile";
 import IconPhone from "./components/icons/icon-phone";
-import {initAppService} from "./services/initApp.service";
 import IconDelete from "./components/icons/icon-delete";
 // Utils
 import {getScreenComponent, Screens} from "./utils/screenList";
+import {initAppService} from "./services/initApp.service";
+// Styles
+import './styles.css';
+
 registerComponent('Button', Button);
 registerComponent('ChatItem', ChatItem);
 registerComponent('ChatsList', ChatsList);
