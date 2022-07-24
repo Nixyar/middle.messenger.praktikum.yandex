@@ -24,3 +24,4 @@ https://oleg-messenger.herokuapp.com/
 - npm run build (для сборки проекта)
 
 ##Открытый pull request на выполненный 4 sprint:
+https://github.com/Nixyar/middle.messenger.praktikum.yandex/pull/22
