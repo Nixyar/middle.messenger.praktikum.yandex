@@ -7,8 +7,13 @@
     "start": "webpack-dev-server --hot --config webpack.dev.js",
     "build": "NODE_ENV=production webpack --config webpack.prod.js",
     "test": "jest",
-    "stylelint": "npx stylelint **/*.css",
-    "eslint": "npx eslint **/*.ts"
+    "stylelint": "npx stylelint **.css",
+    "eslint": "eslint .",
+    "docker:build": "docker build -t oleg-messenger .",
+    "docker:run": "docker run oleg-messenger",
+    "heroku:login": "heroku login",
+    "heroku:push": "heroku container:push web",
+    "heroku:release": "heroku container:release web"
   },
   "pre-commit": [
     "stylelint",
@@ -17,7 +22,8 @@
   "dependencies": {
     "express": "4.18.1",
     "handlebars": "4.7.7",
-    "nanoid": "4.0.0"
+    "nanoid": "4.0.0",
+    "tsconfig-paths-webpack-plugin": "3.5.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.4",
@@ -27,12 +33,14 @@
     "@typescript-eslint/parser": "5.30.6",
     "babel-jest": "28.1.3",
     "css-loader": "6.7.1",
+    "dotenv-webpack": "8.0.0",
     "eslint": "8.20.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.26.0",
     "html-webpack-plugin": "5.5.0",
     "jest": "28.1.3",
     "jest-environment-jsdom": "28.1.3",
+    "mini-css-extract-plugin": "2.6.1",
     "postcss": "8.4.14",
     "postcss-loader": "7.0.1",
     "pre-commit": "1.2.2",

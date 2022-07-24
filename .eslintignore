@@ -1,0 +1,7 @@
+/.idea
+/dist
+/node_modules
+/.parcel-cache
+.eslintrc.js
+/src/**/*.spec.ts
+/src/**/*.test.ts
