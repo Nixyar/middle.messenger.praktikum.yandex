@@ -14,8 +14,7 @@
     "docker:run": "docker run oleg-messenger",
     "heroku:login": "heroku login",
     "heroku:push": "heroku container:push web",
-    "heroku:release": "heroku container:release web",
-    "prepare": "husky install"
+    "heroku:release": "heroku container:release web"
   },
   "dependencies": {
     "express": "4.18.1",
@@ -58,7 +57,7 @@
     "webpack-merge": "5.8.0"
   },
   "lint-staged": {
-    "*.test.ts": [
+    "./*.test.ts": [
       "test"
     ]
   }
