@@ -1,5 +1,0 @@
-{
-  "**.css" : "npx stylelint",
-  "*.ts" : "eslint .",
-  "*.js" : "jest"
-}
