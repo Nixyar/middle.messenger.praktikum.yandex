@@ -21,7 +21,7 @@ export default class Block<P = any> {
   public id = nanoid(6);
 
   protected _element: Nullable<HTMLElement> = null;
-  protected readonly props: P;
+  readonly props: P;
   protected children: { [id: string]: Block } = {};
 
   eventBus: () => EventBus<Events>;

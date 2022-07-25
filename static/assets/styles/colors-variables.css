@@ -1,0 +1,16 @@
+:root {
+    /* Colors */
+    --white: #fff;
+    --cream: #f9f0da;
+    --light-blue: #3498db;
+    --cadet-blue: #7ba7ab;
+    --dark-grey: #333;
+    --grey: #bfbfbf;
+    --light-grey: #f7f7f9;
+    --lighter-grey: #d7d7dd;
+    --error: #ff2353;
+    --black: #000;
+
+    /* Shadows */
+    --base-shadow: 0 4px 4px rgb(0 0 0 / 10%), 0 0 1px rgb(0 0 0 / 40%);
+}

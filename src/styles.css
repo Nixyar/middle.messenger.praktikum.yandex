@@ -1,6 +1,6 @@
-@import "../assets/styles/fonts.css";
-@import "../assets/styles/reset.css";
-@import "../assets/styles/colors-variables.css";
+@import "../static/assets/styles/fonts.css";
+@import "../static/assets/styles/reset.css";
+@import "../static/assets/styles/colors-variables.css";
 
 div#app {
     height: 100%;

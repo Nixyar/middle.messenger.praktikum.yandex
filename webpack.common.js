@@ -1,8 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: 'development',
   entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -11,21 +11,15 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.json'],
     alias: {
-      'handlebars' : 'handlebars/dist/handlebars.js'
+      'handlebars': 'handlebars/dist/handlebars.js',
+      '@core': path.resolve(__dirname, 'core/'),
+      '@services': path.resolve(__dirname, 'src/services/'),
+      '@utils': path.resolve(__dirname, 'src/utils/'),
+      '@components': path.resolve(__dirname, 'src/components/')
     },
     fallback: {
-      "fs": false
+      'fs': false
     },
-  },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
-    client: {
-      progress: true,
-    },
-    compress: true,
-    port: 3000,
   },
   module: {
     rules: [
@@ -51,9 +45,15 @@ module.exports = {
       },
       {
         test: /\.handlebars$/,
-        loader: "handlebars-loader"
+        loader: 'handlebars-loader'
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      inject: 'body'
+    }),
+    new Dotenv()
+  ],
 };

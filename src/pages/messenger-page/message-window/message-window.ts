@@ -1,6 +1,6 @@
-import Block from '../../../../core/Block';
+import { Block } from '@core';
 import './message-window.css';
-import {WebsocketService} from "../../../services/websocket.service";
+import {WebsocketService} from '@services';
 
 export class MessageWindow extends Block {
     websocket = new WebsocketService();

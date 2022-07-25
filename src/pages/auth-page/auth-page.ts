@@ -1,11 +1,10 @@
-import { Block, BrowseRouter, Store } from '../../../core/index';
+import { Block, BrowseRouter, Store } from '@core';
 // Services
-import { blurValidationForm, submitFormCheck } from '../../services/form.service';
-import { submitSign } from '../../services/submitForm.service';
+import { blurValidationForm, submitFormCheck, submitSign } from '@services';
 // Styles
 import './auth.css';
 // Utils
-import { withRouter, withStore } from '../../utils';
+import { withRouter, withStore } from '@utils';
 
 type LoginPageProps = {
   router: BrowseRouter;
@@ -80,7 +79,7 @@ export class AuthPage extends Block<LoginPageProps> {
             </div>
         </main>
     `;
-  };
+  }
 }
 
 export default withRouter(withStore(AuthPage));
