@@ -58,8 +58,8 @@
     "webpack-merge": "5.8.0"
   },
   "lint-staged": {
-    "./*.test.ts": [
-      "npm test"
+    "*.test.ts": [
+      "test"
     ]
   }
 }
