@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: 'development',
   entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -17,16 +16,6 @@ module.exports = {
     fallback: {
       "fs": false
     },
-  },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
-    client: {
-      progress: true,
-    },
-    compress: true,
-    port: 3000,
   },
   module: {
     rules: [
