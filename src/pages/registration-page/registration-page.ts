@@ -50,13 +50,13 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
         this.setState(blurValidationForm(input, values, errors));
       },
       onSubmit: (evt: SubmitEvent) => {
+        evt.preventDefault();
         const {
           values,
           errors
         } = this.state;
-        evt.preventDefault();
         const submitCheck = submitFormCheck(values, errors);
-        if (!submitCheck) {
+        if (submitCheck) {
           this.setState(submitCheck);
         } else {
           submitSign(values, '/auth/signup');
