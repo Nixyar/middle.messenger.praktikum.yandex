@@ -9,12 +9,16 @@
     "test": "jest",
     "stylelint": "npx stylelint **.css",
     "eslint": "eslint .",
+    "precommit": "npx lint-staged",
     "docker:build": "docker build -t oleg-messenger .",
     "docker:run": "docker run oleg-messenger",
     "heroku:login": "heroku login",
     "heroku:push": "heroku container:push web",
     "heroku:release": "heroku container:release web"
   },
+  "pre-commit": [
+    "precommit"
+  ],
   "dependencies": {
     "express": "4.18.1",
     "handlebars": "4.7.7",
