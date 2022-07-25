@@ -92,6 +92,7 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
                                     error="${errors.phone}"
                                     id="phone" type="number" onBlur=onBlur onFocus=onFocus}}}
                     {{{InputControl inputName="password" label="Password"
+                                    type="password"
                                     inputValue="${values.password}"
                                     error="${errors.password}"
                                     id="password" onBlur=onBlur onFocus=onFocus}}}
