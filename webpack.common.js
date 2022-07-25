@@ -11,10 +11,14 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.json'],
     alias: {
-      'handlebars' : 'handlebars/dist/handlebars.js'
+      'handlebars': 'handlebars/dist/handlebars.js',
+      '@core': path.resolve(__dirname, 'core/'),
+      '@services': path.resolve(__dirname, 'src/services/'),
+      '@utils': path.resolve(__dirname, 'src/utils/'),
+      '@components': path.resolve(__dirname, 'src/components/')
     },
     fallback: {
-      "fs": false
+      'fs': false
     },
   },
   module: {
@@ -41,12 +45,15 @@ module.exports = {
       },
       {
         test: /\.handlebars$/,
-        loader: "handlebars-loader"
+        loader: 'handlebars-loader'
       }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/index.html', inject: 'body' }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      inject: 'body'
+    }),
     new Dotenv()
   ],
 };

@@ -1,8 +1,8 @@
-import { Block, BrowseRouter, Store } from '../../../core';
+import { Block, BrowseRouter, Store } from '@core';
 import '../auth-page/auth.css';
-import { blurValidationForm, submitFormCheck } from '../../services/form.service';
-import { withRouter, withStore } from '../../utils';
-import { submitSign } from '../../services/submitForm.service';
+import { blurValidationForm, submitFormCheck } from '@services';
+import { withRouter, withStore } from '@utils';
+import { submitSign } from '@services';
 
 export enum RegistrationValidator {
   FirstName = 'first_name',

@@ -1,6 +1,6 @@
-import Block from '../../../../core/Block';
+import { Block } from '@core';
 import "./chats-list.css";
-import { createChat, getChats, logout } from '../../../services/messengerApi.service';
+import { createChat, getChats, logout } from '@services';
 
 interface ChatListProps {
     chatList: ChatItem[];

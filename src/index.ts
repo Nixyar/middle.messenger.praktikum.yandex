@@ -1,4 +1,4 @@
-import { BrowseRouter, registerComponent, Store } from '../core/index';
+import { BrowseRouter, registerComponent, Store } from '@core';
 // Components import
 import Button from "./components/button";
 import Input from "./components/input-control/input";
@@ -17,8 +17,8 @@ import IconProfile from "./components/icons/icon-profile";
 import IconPhone from "./components/icons/icon-phone";
 import IconDelete from "./components/icons/icon-delete";
 // Utils
-import {getScreenComponent, Screens} from "./utils/screenList";
-import {initAppService} from "./services/initApp.service";
+import {getScreenComponent, Screens} from "@utils";
+import {initAppService} from '@services';
 // Styles
 import './styles.css';
 

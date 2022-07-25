@@ -1,4 +1,4 @@
-import {Block} from "../../../core";
+import {Block} from "@core";
 import './chat-header.css';
 
 export class ChatHeader extends Block {

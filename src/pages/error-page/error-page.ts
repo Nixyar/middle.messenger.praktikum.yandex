@@ -1,6 +1,6 @@
-import { Block, BrowseRouter, Store } from '../../../core';
+import { Block, BrowseRouter, Store } from '@core';
 import './error-page.css';
-import { withRouter, withStore } from '../../utils';
+import { withRouter, withStore } from '@utils';
 
 interface ErrorPageProps {
   router: BrowseRouter;

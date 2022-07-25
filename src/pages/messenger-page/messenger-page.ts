@@ -1,6 +1,6 @@
-import { Block, BrowseRouter, Store } from '../../../core';
+import { Block, BrowseRouter, Store } from '@core';
 // Utils
-import { withRouter, withStore } from '../../utils';
+import { withRouter, withStore } from '@utils';
 // Styles
 import './messenger.css';
 

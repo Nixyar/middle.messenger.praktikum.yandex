@@ -1,11 +1,11 @@
-import { Block, BrowseRouter, Store } from '../../../core';
-import { withRouter, withStore } from '../../utils';
+import { Block, BrowseRouter, Store } from '@core';
+import { withRouter, withStore } from '@utils';
 import './settings-page.css';
 import {
   changeAvatar,
   changePassword,
   changeProfileInfo
-} from '../../services/messengerApi.service';
+} from '@services';
 
 interface SettingsPageProps {
   router: BrowseRouter;
