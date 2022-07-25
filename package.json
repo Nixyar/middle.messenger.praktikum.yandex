@@ -9,16 +9,13 @@
     "test": "jest",
     "stylelint": "npx stylelint **.css",
     "eslint": "eslint .",
-    "precommit": "npx lint-staged",
     "docker:build": "docker build -t oleg-messenger .",
     "docker:run": "docker run oleg-messenger",
     "heroku:login": "heroku login",
     "heroku:push": "heroku container:push web",
-    "heroku:release": "heroku container:release web"
+    "heroku:release": "heroku container:release web",
+    "prepare": "husky install"
   },
-  "pre-commit": [
-    "precommit"
-  ],
   "dependencies": {
     "express": "4.18.1",
     "handlebars": "4.7.7",
@@ -40,6 +37,7 @@
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.26.0",
     "html-webpack-plugin": "5.5.0",
+    "husky": "8.0.1",
     "jest": "28.1.3",
     "jest-environment-jsdom": "28.1.3",
     "lint-staged": "13.0.3",
