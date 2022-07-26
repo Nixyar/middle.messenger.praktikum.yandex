@@ -1,4 +1,4 @@
-import {Dispatch} from "../../core";
+import {Dispatch} from '@core';
 import {HTTPTransportService} from "./HTTPTransport.service";
 
 export async function initAppService(dispatch: Dispatch<AppState>) {

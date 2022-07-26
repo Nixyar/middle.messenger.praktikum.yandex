@@ -1,5 +1,5 @@
 import {HTTPTransportService} from "./HTTPTransport.service";
-import EventBus from "../../core/EventBus";
+import { EventBus } from "@core";
 
 export class WebsocketService extends EventBus{
     http = new HTTPTransportService();
