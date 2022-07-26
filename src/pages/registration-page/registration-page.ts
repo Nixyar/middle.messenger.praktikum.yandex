@@ -23,14 +23,6 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
     super(props);
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      if (window.store.getState().user) {
-        window.router.go('/messenger');
-      }
-    }, 200);
-  }
-
   protected getStateFromProps() {
     this.state = {
       values: {

@@ -1,4 +1,4 @@
-import {BlockClass} from "../../core/Block";
+import {BlockClass} from '@core';
 import {RegistrationPage} from "../pages/registration-page/registration-page";
 import MessengerPage from "../pages/messenger-page";
 import ErrorPage from "../pages/error-page";

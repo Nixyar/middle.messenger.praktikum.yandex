@@ -9,15 +9,6 @@ export class MessageWindow extends Block {
         super();
     }
 
-    componentDidMount() {
-        setTimeout(() => {
-            const user = window.store.getState().user;
-            if (user) {
-                this.websocket.connectToWebsocket(user.id, 298);
-            }
-        }, 100);
-    }
-
     protected getStateFromProps() {
         this.state = {
             message: '',
@@ -36,6 +27,7 @@ export class MessageWindow extends Block {
                 evt.preventDefault();
                 if (message.length) {
                     this.websocket.sendMessage(message);
+                    this.websocket.getOldMessages();
                     console.log('Message: ', message);
 
                     const nextState = {
