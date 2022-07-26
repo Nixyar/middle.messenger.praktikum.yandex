@@ -1,7 +1,15 @@
-FROM node:14.16.1
-WORKDIR /var/www
-COPY package.json ./
+FROM node:14
+
+WORKDIR /app
+
+COPY package*.json ./
+
 RUN npm install
+
 COPY . .
+
+RUN npm run build
+
 EXPOSE 3000
-CMD npm run start
+
+CMD [ "node", "server.js" ]

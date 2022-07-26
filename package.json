@@ -13,6 +13,7 @@
     "docker:build": "docker build -t oleg-messenger .",
     "docker:run": "docker run oleg-messenger",
     "heroku:login": "heroku login",
+    "heroku:login-container": "heroku container:login",
     "heroku:push": "heroku container:push web",
     "heroku:release": "heroku container:release web"
   },
