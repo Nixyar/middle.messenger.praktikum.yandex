@@ -9,7 +9,7 @@
 
 ## Domain on Netlify
 
-https://jolly-souffle-0cce95.netlify.app
+https://jolly-souffle-0cce95.netlify.app/
 
 ## Domain on Heroku
 

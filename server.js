@@ -2,15 +2,14 @@ const path = require('path');
 const express = require('express');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, '/dist/')));
+app.use(express.static(`${__dirname}/dist/`));
 
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
+app.listen(PORT, () => {
+  console.log(`Example app started on http://localhost:${PORT}/`);
 });
 
-
-app.listen(process.env.PORT || PORT, function () {
-  console.log(`Example app listening on port ${PORT}!`);
+app.get('*', (request, response) => {
+  response.sendFile(path.resolve(`${__dirname}/dist/index.html`));
 });

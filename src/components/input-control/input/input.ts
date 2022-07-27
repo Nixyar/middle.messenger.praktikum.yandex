@@ -10,16 +10,18 @@ interface InputProps {
     error?: string;
     onFocus?: () => void;
     onBlur?: () => void;
+    mouseout?: () => void;
     events?: {};
 }
 
 export class Input extends Block {
-    constructor({type = 'text', id, placeholder, inputName, value, error, onFocus, onBlur}: InputProps) {
+    constructor({type = 'text', id, placeholder, inputName, value, error, onFocus, onBlur, mouseout}: InputProps) {
         super({
             type, id, placeholder, inputName, value, error,
             events: {
                 focus: onFocus,
                 blur: onBlur,
+                mouseout: mouseout
             }
         });
     }

@@ -10,6 +10,8 @@ declare global {
         appInitialization: boolean;
         isLoading: boolean;
         user: User | null;
+        messages: unknown | null;
+        chatId: number| string | null;
     };
 
     export type User = {

@@ -1,10 +1,10 @@
 import { HTTPTransportService } from './HTTPTransport.service';
 
-interface Error {
+export interface Error {
   'reason': string
 }
 
-interface ResponseChat {
+export interface ResponseChat {
   'id': number,
   'title': string,
   'avatar': string,
@@ -23,11 +23,11 @@ interface ResponseChat {
   }
 }
 
-interface ResponseCreateChat {
+export interface ResponseCreateChat {
   'reason': string
 }
 
-interface ResponseChangeProfile {
+export interface ResponseChangeProfile {
   'first_name': string,
   'second_name': string,
   'display_name': string,
@@ -36,12 +36,12 @@ interface ResponseChangeProfile {
   'phone': string,
 }
 
-interface ResponseChangeAvatar extends ResponseChangeProfile {
+export interface ResponseChangeAvatar extends ResponseChangeProfile {
   'id': number,
   'avatar': string
 }
 
-interface ResponseChangePassword {
+export interface ResponseChangePassword {
   'oldPassword': string,
   'newPassword': string
 }
@@ -69,15 +69,21 @@ export function logout(): Promise<unknown | Error> {
 
 export function changeAvatar(avatar: File): Promise<ResponseChangeAvatar | Error> {
   return http.put('/user/profile/avatar', { data: avatar })
-    .then();
+    .then((res: XMLHttpRequest | any) => {
+      return JSON.parse(res.response);
+    });
 }
 
 export function changeProfileInfo(profileInfo: Indexed): Promise<ResponseChangeProfile | Error> {
   return http.put('/user/profile', { data: profileInfo })
-    .then();
+    .then((res: XMLHttpRequest | any) => {
+      return JSON.parse(res.response);
+    });
 }
 
 export function changePassword(password: string): Promise<ResponseChangePassword | Error> {
   return http.put('/user/password', { data: password })
-    .then();
+    .then((res: XMLHttpRequest | any) => {
+      return JSON.parse(res.response);
+    });
 }

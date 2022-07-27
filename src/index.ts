@@ -50,7 +50,9 @@ declare global {
 export const defaultState: AppState = {
     appInitialization: false,
     isLoading: false,
-    user: null
+    user: null,
+    messages: null,
+    chatId: null
 };
 
 document.addEventListener("DOMContentLoaded", () => {
