@@ -13,6 +13,7 @@ export class WebsocketService extends EventBus {
 
         this.socket.addEventListener('open', () => {
           console.log('Соединение установлено');
+          this.getOldMessages()
         });
 
         this.socket.addEventListener('close', event => {
@@ -26,7 +27,7 @@ export class WebsocketService extends EventBus {
         });
 
         this.socket.addEventListener('message', event => {
-          console.log('Получены данные', event.data);
+          window.store.dispatch({ messages: event.data});
         });
       });
   }

@@ -2,16 +2,41 @@ import { Block } from '@core';
 import './message-window.css';
 import {WebsocketService} from '@services';
 
-export class MessageWindow extends Block {
+type MessageWindowProps = {
+}
+
+export class MessageWindow extends Block<MessageWindowProps> {
     websocket = new WebsocketService();
 
-    constructor() {
-        super();
+    constructor(props: MessageWindowProps) {
+        super(props);
+    }
+
+    componentDidMount() {
+        window.store.on('changed', (prev, next) => {
+            if (prev.user !== next.user) {
+                this.setState({userInfo: window.store.getState().user})
+            }
+            if (prev.chatId !== next.chatId) {
+                if (this.state.userInfo) {
+                    this.websocket.connectToWebsocket(this.state.userInfo.id, +next.chatId);
+                    this.websocket.getOldMessages();
+                }
+            }
+            if (prev.messages !== next.messages) {
+                const nextState = {
+                    ...this.state, messages: next.messages
+                };
+                this.setState(nextState)
+            }
+        });
     }
 
     protected getStateFromProps() {
         this.state = {
+            userInfo: null,
             message: '',
+            messages: [],
             onBlur: (evt: FocusEvent) => {
                 const input = evt.target as HTMLInputElement;
                 const value = input.value.replace("(?i)(\\b)(on\\S+)(\\s*)=|javascript:|(<\\s*)(\\/*)script|style(\\s*)=|(<\\s*)meta", "");
@@ -23,33 +48,27 @@ export class MessageWindow extends Block {
                 this.setState(nextState);
             },
             onSendMessage: (evt: SubmitEvent) => {
-                const {message} = this.state;
                 evt.preventDefault();
+                const {message} = this.state;
                 if (message.length) {
                     this.websocket.sendMessage(message);
-                    this.websocket.getOldMessages();
-                    console.log('Message: ', message);
-
-                    const nextState = {
-                        message: ''
-                    };
-
-                    return this.setState(nextState);
+                    this.setState({message: ''});
                 }
             }
         };
     }
 
     protected render(): string {
+        const {message, messages} = this.state;
         // language=hbs
         return `
             <div class="message-window">
                 {{{ChatHeader}}}
                 <div class="message-window__chat">
-                    <div class="message-window__chat-view"></div>
+                    <div class="message-window__chat-view">${messages}</div>
                     <form class="message-window__chat-control">
                         {{{InputControl inputName="message" placeholder="Введите сообщение..."
-                                        inputValue="${this.state.message}"
+                                        inputValue="${message}"
                                         id="message"
                                         onBlur=onBlur}}}
                         {{{Button type="submit" classes="sign" textBtn="Send" onClick=onSendMessage}}}
