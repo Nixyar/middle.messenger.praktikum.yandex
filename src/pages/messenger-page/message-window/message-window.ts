@@ -18,6 +18,7 @@ export class MessageWindow extends Block<MessageWindowProps> {
                 this.setState({userInfo: window.store.getState().user})
             }
             if (prev.chatId !== next.chatId) {
+                this.setState({chatOpen: true})
                 if (this.state.userInfo) {
                     this.websocket.connectToWebsocket(this.state.userInfo.id, +next.chatId);
                     this.websocket.getOldMessages();
@@ -35,19 +36,16 @@ export class MessageWindow extends Block<MessageWindowProps> {
     protected getStateFromProps() {
         this.state = {
             userInfo: null,
+            chatOpen: false,
             message: '',
             messages: [],
-            onBlur: (evt: FocusEvent) => {
+            onBlur: (evt: KeyboardEvent) => {
+                evt.preventDefault();
                 const input = evt.target as HTMLInputElement;
-                const value = input.value.replace("(?i)(\\b)(on\\S+)(\\s*)=|javascript:|(<\\s*)(\\/*)script|style(\\s*)=|(<\\s*)meta", "");
-
-                const nextState = {
-                    message: value
-                };
-
-                this.setState(nextState);
+                const message = input.value.replace("(?i)(\\b)(on\\S+)(\\s*)=|javascript:|(<\\s*)(\\/*)script|style(\\s*)=|(<\\s*)meta", "");
+                this.setState({message});
             },
-            onSendMessage: (evt: SubmitEvent) => {
+            onSendMessage: (evt: Event) => {
                 evt.preventDefault();
                 const {message} = this.state;
                 if (message.length) {
@@ -64,16 +62,16 @@ export class MessageWindow extends Block<MessageWindowProps> {
         return `
             <div class="message-window">
                 {{{ChatHeader}}}
-                <div class="message-window__chat">
+                {{#if chatOpen}}<div class="message-window__chat">
                     <div class="message-window__chat-view">${messages}</div>
                     <form class="message-window__chat-control">
                         {{{InputControl inputName="message" placeholder="Введите сообщение..."
                                         inputValue="${message}"
                                         id="message"
-                                        onBlur=onBlur}}}
-                        {{{Button type="submit" classes="sign" textBtn="Send" onClick=onSendMessage}}}
+                                        mouseout=onBlur }}}
+                        {{{Button textBtn="Send" onClick=onSendMessage}}}
                     </form>
-                </div>
+                </div>{{/if}}
             </div>
         `;
     }
