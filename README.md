@@ -9,24 +9,11 @@
 
 ## Domain on Netlify
 
-https://deploy-preview-24--jolly-souffle-0cce95.netlify.app
+https://jolly-souffle-0cce95.netlify.app/
 
 ## Domain on Heroku
 
 https://oleg-messenger.herokuapp.com/
-
-Не получается обновить приложение и убрать ошибку, так как постоянно сбрасывает вход.
-
-heroku: Press any key to open up the browser to login or q to exit: <br>
-Opening browser to *** <br>
-Logging in... done <br>
-Logged in as ***@yandex.ru <br>
-middle.messenger.praktikum.yandex % heroku container:push web <br>
-=== Building web (/Users/.../Desktop/middle.messenger.praktikum.yandex/Dockerfile) <br>
-... <br>
-unauthorized: authentication required <br>
-▸    Error: docker push exited with Error: 1 <br>
-
 
 ## Запуск проекта
 
