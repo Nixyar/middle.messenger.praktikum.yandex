@@ -1,4 +1,4 @@
-import Block from '../../../../../core/Block';
+import { Block } from '@core';
 import './chat-item.css';
 
 interface ChatItemProps {
@@ -6,19 +6,19 @@ interface ChatItemProps {
     chatName: string;
     lastMessage: string;
     id: number;
+    onClick?: () => void;
 }
 
 export class ChatItem extends Block {
-    constructor({avatar, chatName, lastMessage, id}: ChatItemProps) {
-        super({avatar, chatName, lastMessage, id});
+    constructor({avatar, chatName, lastMessage, id, onClick}: ChatItemProps) {
+        super({avatar, chatName, lastMessage, id, events: {click: onClick}});
     }
 
     protected render(): string {
         // language=hbs
         return `
-            <div class="chat-item">
+            <div class="chat-item" data-chat-id="{{id}}">
                 <div class="chat-item__img">
-<!--                    <img src="{{avatar}}" alt="avatar">-->
                 </div>
                 <div class="chat-item__information">
                     <p class="chat-item__information-title p2">{{chatName}}</p>

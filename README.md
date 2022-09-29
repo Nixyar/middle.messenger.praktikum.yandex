@@ -1,24 +1,27 @@
-## Sprint 1
-## Description
+## Middle messenger praktikum yandex учебный проект
 
-This project in process...
-Project refactoring on typescript.
-Added eslint.
-Added stylelint.
-Added event handler on forms.
-Added class for work with requests.
+В учебном проекте используется самописный core для создания блока, роутинга и хранилища.
+Шаблонизатором является handlebars.
+Присутствует typescript, postcss, stylelint, eslint, jest.
+Сборка осуществляется в webpack.
+
+## Приблизительный ui описан в папке ui
 
 ## Domain on Netlify
 
-https://deploy-preview-19--jolly-souffle-0cce95.netlify.app/
+https://jolly-souffle-0cce95.netlify.app/
 
-## Install project
+## Domain on Heroku
 
-- npm install  (after cloning project)
+https://oleg-messenger.herokuapp.com/
 
-- npm run start  (for start project)
+## Запуск проекта
 
-- npm run build  (for build project)
+- npm install (после копирования проекта)
 
-### UI design in folder "UI"
-Открытый pull request на выполненный 2 sprint:
+- npm run start (для запуска проекта)
+
+- npm run build (для сборки проекта)
+
+##Открытый pull request на выполненный 4 sprint:
+https://github.com/Nixyar/middle.messenger.praktikum.yandex/pull/22

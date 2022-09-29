@@ -1,6 +1,6 @@
-import { Block, BrowseRouter, Store } from '../../../core';
+import { Block, BrowseRouter, Store } from '@core';
 // Utils
-import { withRouter, withStore } from '../../utils';
+import { withRouter, withStore } from '@utils';
 // Styles
 import './messenger.css';
 
@@ -14,19 +14,12 @@ export class MessengerPage extends Block<MessengerPageProps> {
     super(props);
   }
 
-  protected getStateFromProps() {
-    this.state = {
-      chats: []
-    };
-  }
-
   protected render(): string {
-    const { chats } = this.state;
     // language=hbs
     return `
       <main>
           <div class="messenger-page">
-              {{{ChatsList chatList="${chats}"}}}
+              {{{ChatsList}}}
               {{{MessageWindow}}}
           </div>
       </main>

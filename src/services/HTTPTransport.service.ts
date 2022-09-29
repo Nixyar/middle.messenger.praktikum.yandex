@@ -1,4 +1,4 @@
-const METHODS = {
+export const METHODS = {
     GET: 'GET',
     PUT: 'PUT',
     POST: 'POST',
@@ -40,7 +40,7 @@ export class HTTPTransportService {
 
             const urlEnd = METHODS.GET && data ? url + queryStringify(data) : url
 
-            xhr.open(method, `${process.env.API_ENDPOINT}${urlEnd}`);
+            xhr.open(method, `https://ya-praktikum.tech/api/v2${urlEnd}`);
             if (!(data instanceof File)) {
                 xhr.setRequestHeader('Content-Type', 'application/json');
             }

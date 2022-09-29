@@ -1,4 +1,4 @@
-import {Block} from "../../../../core";
+import {Block} from "@core";
 import {IconsProps} from "../icons.interface";
 
 export class IconExit extends Block {

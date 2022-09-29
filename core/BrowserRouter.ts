@@ -32,7 +32,7 @@ class Route <P = any>{
     }
     match(pathname: string) {
         if (this.#isPrefixId) {
-            pathname = pathname.replace(/\/\d+/, '');;
+            pathname = pathname.replace(/\/\d+/, '');
         }
         return isEqual(pathname, this.#pathname);
     }
@@ -76,7 +76,7 @@ export default class BrowseRouter {
     }
 
     _onRoute(pathname: string) {
-        let route = this.getRoute(pathname);
+        const route = this.getRoute(pathname);
         if (!route) {
             return;
         }

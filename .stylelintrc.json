@@ -1,7 +1,17 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "alpha-value-notation": "number",
-    "selector-class-pattern": null
-  }
+    "selector-class-pattern": null,
+    "indentation": 4,
+    "function-url-quotes": null,
+    "no-descending-specificity": null,
+    "no-empty-source": null,
+    "no-duplicate-selectors": null
+  },
+  "ignoreFiles": [
+    "dist/*",
+    ".idea/*",
+    "node_modules/*",
+    ".parcel-cache/*"
+  ]
 }

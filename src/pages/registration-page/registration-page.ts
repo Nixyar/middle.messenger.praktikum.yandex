@@ -1,8 +1,8 @@
-import { Block, BrowseRouter, Store } from '../../../core';
+import { Block, BrowseRouter, Store } from '@core';
 import '../auth-page/auth.css';
-import { blurValidationForm, submitFormCheck } from '../../services/form.service';
-import { withRouter, withStore } from '../../utils';
-import { submitSign } from '../../services/submitForm.service';
+import { blurValidationForm, submitFormCheck } from '@services';
+import { withRouter, withStore } from '@utils';
+import { submitSign } from '@services';
 
 export enum RegistrationValidator {
   FirstName = 'first_name',
@@ -50,13 +50,13 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
         this.setState(blurValidationForm(input, values, errors));
       },
       onSubmit: (evt: SubmitEvent) => {
+        evt.preventDefault();
         const {
           values,
           errors
         } = this.state;
-        evt.preventDefault();
         const submitCheck = submitFormCheck(values, errors);
-        if (!submitCheck) {
+        if (submitCheck) {
           this.setState(submitCheck);
         } else {
           submitSign(values, '/auth/signup');
@@ -92,6 +92,7 @@ export class RegistrationPage extends Block<RegistrationPageProps> {
                                     error="${errors.phone}"
                                     id="phone" type="number" onBlur=onBlur onFocus=onFocus}}}
                     {{{InputControl inputName="password" label="Password"
+                                    type="password"
                                     inputValue="${values.password}"
                                     error="${errors.password}"
                                     id="password" onBlur=onBlur onFocus=onFocus}}}

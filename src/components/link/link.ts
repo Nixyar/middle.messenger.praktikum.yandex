@@ -1,6 +1,5 @@
-import Block from '../../../core/Block';
+import { Block, BrowseRouter } from '@core';
 import './link.css';
-import BrowseRouter from '../../../core/BrowserRouter';
 
 interface LinkProps {
     text: string;

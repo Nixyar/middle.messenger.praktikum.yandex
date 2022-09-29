@@ -1,10 +1,15 @@
-import { Block, BrowseRouter, Store } from '../../../core';
-import { withRouter, withStore } from '../../utils';
+import { Block, BrowseRouter, Store } from '@core';
+import { withRouter, withStore } from '@utils';
 import './settings-page.css';
 import {
   changeAvatar,
   changePassword,
   changeProfileInfo
+} from '@services';
+import {
+  Error,
+  ResponseChangeAvatar,
+  ResponseChangePassword, ResponseChangeProfile
 } from '../../services/messengerApi.service';
 
 interface SettingsPageProps {
@@ -26,8 +31,22 @@ export class SettingsPage extends Block<SettingsPageProps> {
     super(props);
   }
 
+  componentDidMount() {
+    window.store.on('changed', (prev, next) => {
+      if (prev.user !== next.user) {
+        const nextState = {
+          ...this.state,
+          user: next.user
+        };
+        this.setState(nextState);
+      }
+    });
+  }
+
   protected getStateFromProps() {
     this.state = {
+      user: null,
+      userAvatar: null,
       values: {
         avatar: '',
         first_name: '',
@@ -55,14 +74,14 @@ export class SettingsPage extends Block<SettingsPageProps> {
         const { values } = this.state;
 
         if (values.avatar) {
-          changeAvatar(values.avatar).then(() => {
-              // @ts-ignore
-              document.getElementById('settings-form').reset();
+          changeAvatar(values.avatar)
+            .then((event: ResponseChangeAvatar | Error) => {
+              this.setState({user: event});
             });
         }
 
         if (values.first_name || values.second_name || values.login || values.phone) {
-          const sendProfileInfo: sendProfileInfoType = {
+          const sendProfileInfo: any = {
             first_name: '',
             second_name: '',
             display_name: '',
@@ -70,29 +89,30 @@ export class SettingsPage extends Block<SettingsPageProps> {
             email: '',
             phone: '',
           };
-          const profileStore: User | null = window.store.getState().user;
+          const profileStore: User | any = window.store.getState().user;
           for (const key in values as sendProfileInfoType) {
             if (key !== 'avatar' && key !== 'password' && key !== 'display_name') {
-              if (values[key]) {
-                sendProfileInfo[key] = values[key];
-              } else {
-                sendProfileInfo[key] = profileStore[key] || null;
+              if (values.hasOwnProperty(key)) {
+                if (values[key]) {
+                  sendProfileInfo[key] = values[key];
+                } else {
+                  sendProfileInfo[key] = profileStore[key] || null;
+                }
               }
             } else if (key === 'display_name') {
               sendProfileInfo[key] = `${sendProfileInfo['second_name']} ${sendProfileInfo['first_name']}`;
             }
           }
-          changeProfileInfo(sendProfileInfo).then((user: any) => {
-              // @ts-ignore
-              document.getElementById('settings-form').reset();
-              window.store.dispatch(JSON.parse(user.response));
+          changeProfileInfo(sendProfileInfo)
+            .then((event: ResponseChangeProfile | Error) => {
+              this.setState({user: event});
             });
         }
 
         if (values.password) {
-          changePassword(values.password).then(() => {
-              // @ts-ignore
-              document.getElementById('settings-form').reset();
+          changePassword(values.password)
+            .then((event: ResponseChangePassword | Error) => {
+              this.setState({user: event});
             });
         }
       }
@@ -100,12 +120,26 @@ export class SettingsPage extends Block<SettingsPageProps> {
   }
 
   protected render(): string {
-    const { values } = this.state;
+    // @ts-ignore
+    const {
+      user,
+      values
+    } = this.state;
     // language=hbs
     return `
         <main>
             {{{ChatHeader}}}
             {{{Button textBtn="Назад" onClick=backToMessage}}}
+            <div>
+                {{#if user.avatar}}
+                    <img src="https://ya-praktikum.tech/api/v2/resources/${user?.avatar}"
+                         alt="avatar">{{/if}}
+                <p>${user?.login}</p>
+                <p>${user?.phone}</p>
+                <p>${user?.first_name}</p>
+                <p>${user?.second_name}</p>
+            </div>
+
             <form class="settings-form p2" id="settings-form">
                 {{{InputControl type="file" inputName="avatar" label="Change avatar"
                                 onBlur=onBlur id="avatar"}}}

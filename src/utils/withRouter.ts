@@ -1,5 +1,4 @@
-import { BrowseRouter } from '../../core';
-import { BlockClass } from '../../core/Block';
+import { BrowseRouter, BlockClass } from '@core';
 
 type WithRouterProps = { router: BrowseRouter }
 

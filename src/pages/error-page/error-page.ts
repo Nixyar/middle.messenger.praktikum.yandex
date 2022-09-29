@@ -1,6 +1,6 @@
-import { Block, BrowseRouter, Store } from '../../../core';
+import { Block, BrowseRouter, Store } from '@core';
 import './error-page.css';
-import { withRouter, withStore } from '../../utils';
+import { withRouter, withStore } from '@utils';
 
 interface ErrorPageProps {
   router: BrowseRouter;
@@ -15,7 +15,7 @@ export class ErrorPage extends Block<ErrorPageProps> {
   protected getStateFromProps() {
     this.state = {
       goBack: () => {
-        this.props.router.go('/');
+        window.router.go('/');
       }
     };
   }
@@ -24,7 +24,7 @@ export class ErrorPage extends Block<ErrorPageProps> {
     // language=hbs
     return `
         <main>
-            {{{Button classes="sign" textBtn="Go back" onClick=onSubmit}}}
+            {{{Button classes="sign" textBtn="Go back" onClick=goBack}}}
         </main>
         `;
   }

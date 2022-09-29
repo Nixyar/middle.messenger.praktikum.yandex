@@ -1,4 +1,4 @@
-@import "../../../../assets/styles/colors-variables.css";
+@import "../../../../static/assets/styles/colors-variables.css";
 
 .message-window {
     width: 81%;
@@ -20,7 +20,7 @@
 }
 
 .chat-control button:hover svg path {
-    fill: #FFFFFF;
+    fill: #fff;
 }
 
 .message-window__chat-view {
@@ -32,7 +32,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px;
-
 }
 
 .message-window__chat-control label {
